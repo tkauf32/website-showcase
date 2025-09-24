@@ -17,3 +17,41 @@ body { margin:0; font:16px/1.5 system-ui, sans-serif; background:var(--bg); colo
 .btn { display:inline-block; background:var(--acc); color:white; padding:.6rem 1rem; border-radius:.6rem; text-decoration:none; }
 .item h1 { margin-top:0; }
 .meta ul { list-style:none; padding:0; opacity:.8; }
+/* Inline image rows */
+.img-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 1rem 0;
+}
+@media (min-width: 720px) {
+  .img-row { grid-template-columns: 1fr 1fr; }
+}
+.img-row figure { margin: 0; }
+.img-row img { width: 100%; height: auto; border-radius: 8px; display: block; }
+.img-row figcaption { font-size: 0.9rem; opacity: 0.8; margin-top: 0.35rem; }
+
+/* Compact gallery grid (auto thumbnails) */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 8px;
+  margin: 1rem 0;
+}
+@media (min-width: 960px) {
+  .gallery-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+.gallery-grid img { width: 100%; height: auto; border-radius: 8px; display: block; }
+
+/* Don’t let generic content images explode */
+.item .content img { max-width: 100%; height: auto; }
+.viewer-3d {
+  width: 100%;
+  height: 420px;            /* adjust as you like */
+  background: radial-gradient(ellipse at center, #f8f8fb 0%, #f1f3f7 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1rem 0 1.25rem;
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+.viewer-3d canvas { width: 100%; height: 100%; display: block; }

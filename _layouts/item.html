@@ -45,20 +45,6 @@ layout: default
   </div>
 {% endif %}
 
-{% if page.related_printables %}
-  <h3>Related Printables</h3>
-  <ul>
-    {% for slug in page.related_printables %}
-      {% assign p = site.printables | where: "slug", slug | first %}
-      {% if p %}
-        <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
-      {% else %}
-        <li>{{ slug }} (missing)</li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-{% endif %}
-
   <div class="content">{{ content }}</div>
 
   <aside class="meta">
