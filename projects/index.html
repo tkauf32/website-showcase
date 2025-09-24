@@ -1,0 +1,16 @@
+---
+layout: default
+title: "Projects"
+---
+
+<h1>Projects</h1>
+<div class="grid">
+  {% for item in site.projects %}
+    <a class="card" data-cat="projects" data-tags="{{ item.tags | join: ' ' }}" href="{{ item.url | relative_url }}">
+      <div class="thumb">{% if item.poster %}<img src="{{ item.poster | relative_url }}" alt="">{% endif %}</div>
+      <div class="body">
+        <h3>{{ item.title }}</h3>
+      </div>
+    </a>
+  {% endfor %}
+</div>

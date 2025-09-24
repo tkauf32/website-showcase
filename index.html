@@ -1,0 +1,35 @@
+---
+layout: default
+title: "All Items"
+---
+<h1>Catalog</h1>
+
+<div class="controls">
+  <input id="q" class="search" placeholder="Type to filter by title or tag…" />
+  <div class="chips">
+    <button data-chip="projects">projects</button>
+    <button data-chip="printables">printables</button>
+    <button data-chip="products">products</button>
+    <button data-chip="links">links</button>
+  </div>
+</div>
+
+<div id="grid" class="grid">
+  {% assign items = site.projects | concat: site.printables | concat: site.products | concat: site.links %}
+  {% for item in items %}
+    <a class="card" data-cat="{{ item.category }}" data-tags="{{ item.tags | join: ' ' }}"
+       href="{{ item.url | relative_url }}">
+      <div class="thumb">
+        {% if item.poster %}<img src="{{ item.poster | relative_url }}" alt="">{% endif %}
+      </div>
+      <div class="body">
+        <h3>{{ item.title }}</h3>
+        {% if item.tags %}
+          <div class="tags">
+            {% for t in item.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </a>
+  {% endfor %}
+</div>

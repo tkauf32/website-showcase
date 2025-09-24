@@ -1,0 +1,13 @@
+{
+  "name": "scrappy-catalog",
+  "private": true,
+  "scripts": {
+    "build": "/opt/homebrew/opt/ruby@3.3/bin/bundle exec jekyll build",
+    "postbuild": "npx pagefind --source _site",
+    "dev": "/opt/homebrew/opt/ruby@3.3/bin/bundle exec jekyll serve --livereload --host 0.0.0.0",
+    "build:search": "npm run build && npx pagefind --source _site"
+  },
+  "devDependencies": {
+    "pagefind": "^1.0.0"
+  }
+}
