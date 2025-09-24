@@ -8,9 +8,11 @@ models:
   - title: "Ikea ALEX Drawer"
     src: /assets/projects/ikea-downloader/files/ikea-alex.glb
     type: glb
+    yaw: 0
   - title: "Ikea Desk"
     src: /assets/projects/ikea-downloader/files/ikea-desk.glb
     type: glb
+    yaw: 0
 
 ---
 

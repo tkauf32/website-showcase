@@ -65,3 +65,8 @@ download_url: /models/example.glb
 - Replace placeholders in `/models/` with your real `*.glb` / `*.stl` / poster image.
 - You can host large files on S3/Backblaze and point `model_url`/`download_url` to absolute URLs.
 - Pagefind assets are written to `_site/pagefind/` during `build:search`.
+
+
+## Running
+rm -rf _site .jekyll-cache
+/opt/homebrew/opt/ruby@3.3/bin/bundle exec jekyll serve --livereload --host 0.0.0.0

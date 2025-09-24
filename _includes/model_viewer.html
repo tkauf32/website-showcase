@@ -15,16 +15,59 @@
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.setClearColor(0xFFFFFFF, 1);
+
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 100);
   camera.position.set(1.2, 0.9, 1.6);
 
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
+  controls.autoRotate = true;         // spin by default
+  controls.autoRotateSpeed = 1.2;     // tweak to taste
+
+  let userInteracted = false;
+  const pauseAuto = () => { userInteracted = true; controls.autoRotate = false; };
+  const resumeAuto = () => { if (!userInteracted) controls.autoRotate = true; };
+
+  // Listen for any pointer interaction on the canvas
+  ['pointerdown','wheel','keydown','touchstart'].forEach(evt =>
+    canvas.addEventListener(evt, pauseAuto, { passive: true })
+  );
+
+  // Optional: resume after some idle time (e.g., 6s)
+  let idleTimer;
+  const resetIdleTimer = () => {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => { userInteracted = false; controls.autoRotate = true; }, 6000);
+  };
+  ['pointerup','mouseleave','touchend'].forEach(evt =>
+    canvas.addEventListener(evt, resetIdleTimer, { passive: true })
+  );
 
   // Lighting (simple, no HDR to avoid CORS)
   scene.add(new THREE.HemisphereLight(0xffffff, 0x222233, 0.9));
   const dir = new THREE.DirectionalLight(0xffffff, 0.7);
+
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x2a2a3a, 0.65);
+  scene.add(hemi);
+
+  dir.position.set(2.5, 4.0, 2.0);
+  scene.add(dir);
+
+  // Helps lift shadows without blowing highlights
+  scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+  // Optional: globally reduce specular/reflection intensity if models look too glossy
+  scene.traverse(obj => {
+    if (obj.isMesh && obj.material && obj.material.isMeshStandardMaterial) {
+      obj.material.roughness = Math.min(1.0, (obj.material.roughness ?? 0.5) + 0.15);
+      // obj.material.envMapIntensity = 0.5; // enable if you add an HDR environment later
+    }
+  });
+
   new RGBELoader()
     .load("{{ '/assets/env/studio_small_03_1k.hdr' | relative_url }}", (hdr) => {
       hdr.mapping = THREE.EquirectangularReflectionMapping;
@@ -44,6 +87,10 @@
     src,
     (gltf) => {
       const root = gltf.scene || gltf.scenes?.[0];
+      const yawDeg = {{ include.rotation_y | default: 0 }};
+      if (yawDeg) {
+        root.rotation.y = yawDeg * Math.PI / 180;
+      }
       if (!root) throw new Error("GLB loaded but no scene found");
       scene.add(root);
 

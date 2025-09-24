@@ -12,29 +12,32 @@ layout: default
     </div>
   {% endif %}
 
-  {%- assign has_models = page.models and page.models.size > 0 -%}
-  {%- if has_models -%}
-    <div class="viewer-grid">
-      {%- for m in page.models -%}
-        <div class="viewer-cell">
-          {%- assign src = m.src -%}
-          {%- assign kind = m.type | default: '' -%}
-          {%- if kind == 'glb' or src contains '.glb' or src contains '.gltf' -%}
-            {% include model_viewer.html src=src poster=page.poster environment="neutral" %}
-          {%- elsif kind == 'stl' or src contains '.stl' -%}
-            {% include stl_viewer.html src=src %}
-          {%- endif -%}
-          {%- if m.title -%}<div class="viewer-caption">{{ m.title }}</div>{%- endif -%}
-        </div>
-      {%- endfor -%}
-    </div>
-  {%- else -%}
-    {%- if page.model_url -%}
-      {% include model_viewer.html src=page.model_url poster=page.poster environment="neutral" %}
-    {%- elsif page.stl_url -%}
-      {% include stl_viewer.html src=page.stl_url %}
-    {%- endif -%}
-  {%- endif -%}
+{% assign models_count = page.models | size %}
+{% if page.models and models_count > 0 %}
+  <div class="viewer-grid">
+    {% for m in page.models %}
+      <div class="viewer-cell">
+        {% assign src  = m.src %}
+        {% assign kind = m.type | default: '' %}
+        {% assign rot  = m.yaw | default: page.initial_yaw %}
+
+        {% if kind == 'glb' or src contains '.glb' or src contains '.gltf' %}
+          {% include model_viewer.html src=src rotation_y=m.yaw %}
+        {% elsif kind == 'stl' or src contains '.stl' %}
+          {% include stl_viewer.html src=src rotation_y=m.yaw %}
+        {% endif %}
+
+        {% if m.title %}<div class="viewer-caption">{{ m.title }}</div>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  {% if page.model_url %}
+    {% include model_viewer.html src=page.model_url %}
+  {% elsif page.stl_url %}
+    {% include stl_viewer.html src=page.stl_url %}
+  {% endif %}
+{% endif %}
 
   {% if page.affiliate_url %}
     <p><a class="btn" href="{{ page.affiliate_url }}" target="_blank" rel="nofollow sponsored">Buy / Learn More</a></p>
