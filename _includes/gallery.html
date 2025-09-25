@@ -1,0 +1,9 @@
+{% assign prefix = "/assets/" | append: page.collection | append: "/" | append: page.slug | append: "/images/" %}
+{% assign imgs = site.static_files | where_exp: "f", "f.path startswith prefix" %}
+<div class="gallery">
+  {% for f in imgs %}
+    {% if f.extname == ".jpg" or f.extname == ".png" or f.extname == ".jpeg" or f.extname == ".webp" %}
+      <img src="{{ f.path }}" alt="{{ page.title }} image {{ forloop.index }}">
+    {% endif %}
+  {% endfor %}
+</div>

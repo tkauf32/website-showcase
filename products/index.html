@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "Printables"
+title: "Products"
 ---
 
-<h1>Printables</h1>
+<h1>Proucts</h1>
 <div class="grid">
-  {% for item in site.projects %}
-    <a class="card" data-cat="printables" data-tags="{{ item.tags | join: ' ' }}" href="{{ item.url | relative_url }}">
+  {% for item in site.products %}
+    <a class="card" data-cat="products" data-tags="{{ item.tags | join: ' ' }}" href="{{ item.url | relative_url }}">
       <div class="thumb">{% if item.poster %}<img src="{{ item.poster | relative_url }}" alt="">{% endif %}</div>
       <div class="body">
         <h3>{{ item.title }}</h3>

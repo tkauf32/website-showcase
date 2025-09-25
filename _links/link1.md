@@ -1,7 +1,7 @@
 ---
-title: "Shiori (self-hosted bookmarks)"
+title: "Link-x"
 tags: ["links","selfhosted"]
-poster:
 ---
 
-I use it to track interesting builds. Public list here: https://example.com
+I use this link here to host links --> [links.tomkauf.com](https://links.tomkauf.com)
+
