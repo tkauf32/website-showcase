@@ -3,7 +3,7 @@ layout: default
 title: "Products"
 ---
 
-<h1>Proucts</h1>
+<h1>Products</h1>
 <div class="grid">
   {% for item in site.products %}
     <a class="card" data-cat="products" data-tags="{{ item.tags | join: ' ' }}" href="{{ item.url | relative_url }}">
