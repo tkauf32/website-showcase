@@ -1,0 +1,37 @@
+title: "Tom Kauf's Catalog"
+baseurl: ""
+url: "http://localhost:8081"
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:slug/
+  printables:
+    output: true
+    permalink: /printables/:slug/
+  products:
+    output: true
+    permalink: /products/:slug/
+  links:
+    output: true
+    permalink: /links/:slug/
+
+defaults:
+  - scope: { path: "", type: "projects" }
+    values: { layout: item, category: "projects" }
+  - scope: { path: "", type: "printables" }
+    values: { layout: item, category: "printables" }
+  - scope: { path: "", type: "products" }
+    values: { layout: item, category: "products" }
+  - scope: { path: "", type: "links" }
+    values: { layout: item, category: "links" }
+
+exclude:
+  - vendor
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - package-lock.json
+  - README.md
+  - Dockerfile

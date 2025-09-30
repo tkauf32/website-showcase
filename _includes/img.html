@@ -1,0 +1,2 @@
+{% assign root = "/assets/" | append: page.collection | append: "/" | append: page.slug | append: "/images/" %}
+<img src="{{ root }}{{ include.name }}" alt="{{ include.alt | default: page.title }}">

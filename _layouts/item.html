@@ -1,0 +1,79 @@
+---
+layout: default
+---
+<article class="item">
+  <h1>{{ page.title }}</h1>
+
+  {% if page.tags %}
+    <div class="tags">
+      {% for t in page.tags %}
+        <span class="tag">{{ t }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+{% assign models_count = page.models | size %}
+{% if page.models and models_count > 0 %}
+  <div class="viewer-grid">
+    {% for m in page.models %}
+      <div class="viewer-cell">
+        {% assign src  = m.src %}
+        {% assign kind = m.type | default: '' %}
+        {% assign rot  = m.yaw | default: page.initial_yaw %}
+
+        {% if kind == 'glb' or src contains '.glb' or src contains '.gltf' %}
+          {% include model_viewer.html src=src rotation_y=m.yaw %}
+        {% elsif kind == 'stl' or src contains '.stl' %}
+          {% include stl_viewer.html src=src rotation_y=m.yaw %}
+        {% endif %}
+
+        {% if m.title %}<div class="viewer-caption">{{ m.title }}</div>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  {% if page.model_url %}
+    {% include model_viewer.html src=page.model_url %}
+  {% elsif page.stl_url %}
+    {% include stl_viewer.html src=page.stl_url %}
+  {% endif %}
+{% endif %}
+
+  {% if page.affiliate_url %}
+    <p><a class="btn" href="{{ page.affiliate_url }}" target="_blank" rel="nofollow sponsored">Buy / Learn More</a></p>
+  {% endif %}
+
+  {% if page.download_url %}
+    <p><a class="btn" href="{{ page.download_url }}" download>Download Files</a></p>
+  {% endif %}
+
+  {% if page.downloads %}
+  <div class="downloads">
+    {% for d in page.downloads %}
+      <p><a class="btn" href="{{ d.url | relative_url }}" download>{{ d.label }}</a></p>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if page.gallery %}
+  <h3>Gallery</h3>
+  <div class="gallery-grid">
+    {% for g in page.gallery %}
+      <a href="{{ g | relative_url }}" target="_blank" rel="noopener">
+        <img src="{{ g | relative_url }}" loading="lazy" alt="">
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+
+  <div class="content">{{ content }}</div>
+
+  <aside class="meta">
+    <ul>
+      {% if page.printer %}<li><strong>Printer:</strong> {{ page.printer }}</li>{% endif %}
+      {% if page.material %}<li><strong>Material:</strong> {{ page.material }}</li>{% endif %}
+      {% if page.time_to_print %}<li><strong>Print Time:</strong> {{ page.time_to_print }}</li>{% endif %}
+      {% if page.rating %}<li><strong>Rating:</strong> {{ page.rating }}/5</li>{% endif %}
+    </ul>
+  </aside>
+</article>
