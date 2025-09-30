@@ -1,11 +1,11 @@
 ---
 layout: default
-title: "shark stratos cordless vacuum"
+title: "Shark Stratos Cordless Vacuum"
 date: 2025-09-28
-slug: shark-stratos-cordless-vacuum
 collection: products
 assets_dir: /assets/products/shark-stratos-cordless-vacuum
-poster: /assets/products/default-poster.png
+poster: /assets/products/shark-stratos-cordless-vacuum/images/poster.png
+permalink: /products/shark-stratos-cordless-vacuum/
 ---
 
 ## Summary

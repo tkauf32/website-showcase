@@ -1,5 +1,5 @@
 ---
-layout: product
+layout: default
 title: "{{title}}"
 date: {{date}}
 slug: {{slug}}
