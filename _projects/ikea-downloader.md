@@ -16,20 +16,37 @@ models:
 
 ---
 
-I found this useful project on github for downloading 3D files from ikea's CDN. You can grab most files in a .gltf or .glb file format, comes with textures, and is quite dimensionally accurate. The project is well done as it leverages a browser plugin called ???monkeyjs??? (fix) to add a download button onto the website for items that are supported for download. 
+I found this really useful project on GitHub for downloading 3D files straight from Ikea's CDN. You can grab most files in a `.gltf` or `.glb` format — complete with textures — and they’re surprisingly dimensionally accurate. The project is super scrappy but clever. It works by using a browser userscript via [Tampermonkey](https://www.tampermonkey.net/) to inject a download button right onto Ikea’s product pages. Just click, download, and boom — you’ve got the model. They even provide a CLI tool if you want to batch pull entire catalogs, which is wild.  
+👉 Repo here: [IKEA-3D-Model-Download-Button](https://github.com/apinanaivot/IKEA-3D-Model-Download-Button)
 
-I originally stumbled upon this project becasue I wanted to design  my room in blender before buying, building, and assembling a large desk from ikea. I soon learned how useful this downloading tool was since I was able to download entire caralogs of furniture items and port them into blender for visualization.
+I originally stumbled across this because I wanted to design my room in Blender before buying and assembling a big Ikea desk. Once I saw how well it worked, I started pulling down whole catalogs of furniture and importing them into Blender for quick visualization.
 
-I did this for my room and a barbershop I built so I could make changes quickly and visualize the output. I have links to those project builds over on my YouTube if you want to check them out.
+I ended up doing this not just for my room, but also for a barbershop I was building out. It made the design process way faster since I could make changes on the fly and see the layout instantly. (I’ve got links to those projects over on my YouTube if you want to check them out.)
 
-Blender is an extremely powerful, somehow free, tool 3d modeling. It is a great tool, however, for indoor spatial visualization, we have to import some model of the room. Initially, I measure out my room and manually build the walls, windows, doors, etc. However, using Polycam on a phone (I used an iPhone), I was able to 3D scan and capture the room in a simple way, exporting into a .usdz file format. I can then port that 3D file into blender. This saved a bit of time, but I wanted more immersion. 
+---
 
-Enter my Meta Quest 3 VR Headset. Full fledged immersion. Meta as of recently actually released immersive Gaussian Splats to explore. I have yet to try. However, I watched a Tik Tok of an artist making 3D sculptures in a VR headset, and I wanted to try in. Some quick research into 3D drawing and visualization apps lead me into Shape3D???? Toggling on passthrough mode on your left hand tool bar in the app will give you immersion into your environment. You can import files, draw, whatever your little heart desires for visualization. 
+### Capturing the Space
+Blender is an insanely powerful — and somehow free — tool for 3D modeling. For indoor spatial visualization though, you need some kind of model of your actual room. At first, I just measured things and manually built walls, windows, and doors in Blender. It worked, but it was tedious.  
 
-This is the next step. I wonder if I can build a meta quest app that enables a user to search/browse ikea catalogs, and with the click of a button, pull the 3D file into 
+Then I tried using Polycam on my iPhone to 3D scan the room. Exporting into `.usdz` made it easy to import into Blender. That saved a bunch of time and gave me a more “real” base to work with. But I wanted to take it even further.
 
+---
 
+### Full Immersion with VR
+Enter the Meta Quest 3. Pure immersion. Recently, Meta even released support for exploring immersive Gaussian Splats (still on my to-try list). But what really caught my attention was seeing a TikTok of an artist sculpting in VR. That blew my mind.  
 
+I went digging and found [ShapeXR](https://www.shapexr.com/) (that’s the actual app name I was reaching for). Flip on passthrough mode and you’re suddenly sketching and arranging 3D furniture inside your real environment. You can import the Ikea models, draw, rearrange — whatever your little heart wants. It’s like Blender, but in your living room.
+
+---
+
+### The Next Step
+Naturally, my brain went: *what if I could build a Meta Quest app that lets you browse Ikea’s catalog, pick an item, and drop the 3D file directly into your VR space with one click?*  
+
+That feels like the logical extension of this project — straight from Ikea’s CDN into your headset, no Blender middleman required.  
+
+Not sure if I’ll build it, but it’s fun to imagine where this could go.
+
+---
 
 ## 📂 Downloads
 - [Ikea ALEX (GLB)](/assets/projects/ikea-downloader/files/ikea-alex.glb)  
